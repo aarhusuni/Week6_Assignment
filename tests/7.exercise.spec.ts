@@ -70,11 +70,11 @@ test('verify if any product is listed',async ({page}) => {
     expect(count).toBeGreaterThan(0);
 })
 
-//7.2.Bextra: create test for verifying if any product is listed after selecting a menue, menue selection is random
+//7.2.B extra: create test for verifying if any product is listed after selecting a menue, menue selection is random
 test('verify if any product is listed extra',async ({page}) => {
     await page.goto('/');
     //select random menue
-    //finding every menue items
+    //finding every menue items, selector was found: #shopify-section-header > div > nav > ul > li:nth-child(3) > a  ==> nav ul li a, chat GPT helped top generalise the selector:)   
     const categories = page.locator('nav ul li a');
     //counting how many elements been found
     const count = await categories.count();
@@ -154,6 +154,3 @@ test('breaking the test',async ({page}) => {
     await page.getByRole("link", { name: 'Book' }).click();
     await expect.soft(page).toHaveURL(/Book/);
 })
-
-
-
