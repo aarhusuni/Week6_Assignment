@@ -60,7 +60,6 @@ test('6.3emptyform',async ({page}) => {
 })
 
 
-//I was wondering why 'Login or register' button is a link and not a button
 test('list all links on page', async ({ page }) => {
     await page.goto('https://raider-test-site.onrender.com/');
     // Get all link texts
@@ -70,4 +69,4 @@ test('list all links on page', async ({ page }) => {
     for (const link of links) {
         console.log(link);
     }
-});
+})

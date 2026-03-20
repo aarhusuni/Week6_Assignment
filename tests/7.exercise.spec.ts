@@ -74,8 +74,8 @@ test('verify if any product is listed',async ({page}) => {
 test('verify if any product is listed extra',async ({page}) => {
     await page.goto('/');
     //select random menue
-    //finding every element in class nav-list
-    const categories = page.locator('.nav-list');
+    //finding every menue items
+    const categories = page.locator('nav ul li a');
     //counting how many elements been found
     const count = await categories.count();
     //checking if at least one exist
@@ -87,6 +87,16 @@ test('verify if any product is listed extra',async ({page}) => {
     //checking if any "product card" is visible in this randomly selected menue
     await expect(page.locator('.product-card')).toBeVisible();
 });
+
+//checking is the selector lists all menue items
+test('llisting menue',async ({page}) => {
+    await page.goto('/');
+    const menuItems = page.locator('nav ul li a');
+    console.log(await menuItems.allTextContents());
+});
+
+
+
 
 //7.2.B: create test for verifying if any product detail is loading after selecting a product
 test('verify if product detail page loads',async ({page}) => {
@@ -144,3 +154,6 @@ test('breaking the test',async ({page}) => {
     await page.getByRole("link", { name: 'Book' }).click();
     await expect.soft(page).toHaveURL(/Book/);
 })
+
+
+
