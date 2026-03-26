@@ -55,11 +55,13 @@ test('6.3emptyform',async ({page}) => {
     await page.getByRole('button', { name: 'Login' }).click();
     await expect(page).toHaveURL(startURL);
     //after checking Yianna`s homework I was looking for other wazs to test for this:
-    await expect(page.locator('#loginFrm_loginname')).toHaveValue('');
-    await expect(page.locator('#loginFrm_password')).toHaveValue('');
+    await expect(page.locator('#loginFrm_loginname')).toHaveAttribute('required', '');
+    await expect(page.locator('#loginFrm_password')).toHaveAttribute('required', '');
 })
 
 
+
+//listing all links, its just a helper not a test
 test('list all links on page', async ({ page }) => {
     await page.goto('https://raider-test-site.onrender.com/');
     // Get all link texts

@@ -2,7 +2,7 @@
 import { test, expect } from '@playwright/test';
 
 //6.1: create test useing getByLabel
-test('6.1.A.successful login', async ({page}) => {
+test('6.1.A.successful login2', async ({page}) => {
     //go to page
     await page.goto('/');
     //open 'Login or register, its a link because the element is: "<a href="/index.php?rt=account/login" class="welcome-msg">Login or register</a>" and "<a ...>" tag tels its a link
@@ -20,7 +20,7 @@ test('6.1.A.successful login', async ({page}) => {
 })
 
 //6.1extra:create test useing getByRole
-test('6.1.B.successful login', async ({page}) => {
+test('6.1.B.successful login2', async ({page}) => {
   await page.goto('/');
   await page.getByRole('link', { name: 'Login or register' }).click();
   await page.getByRole('textbox', { name: 'Login name' }).click();
@@ -32,7 +32,7 @@ test('6.1.B.successful login', async ({page}) => {
 })
 
 //6.2: create test for failed login
-test('6.2failedlogin',async ({page}) => {
+test('6.2failedlogin2',async ({page}) => {
     await page.goto('/');
     await page.getByRole("link", { name: 'Login or register' }).click();
     //defining startURL
@@ -46,7 +46,7 @@ test('6.2failedlogin',async ({page}) => {
 })
 
 //6.3: create test for empty form
-test('6.3emptyform',async ({page}) => {
+test('6.3emptyform2',async ({page}) => {
     await page.goto('/');
     await page.getByRole("link", { name: 'Login or register' }).click();
     const startURL = page.url();
@@ -63,7 +63,7 @@ test('6.3emptyform',async ({page}) => {
 test('verify if any product is listed',async ({page}) => {
     await page.goto('/');
     await page.getByRole("link", { name: 'Apparel & Accessories' }).click();
-    await expect(page.getByText('DCasual 3/4 Sleeve Baseball T-Shirt')).toBeVisible
+    await expect(page.getByText('Casual 3/4 Sleeve Baseball T-Shirt')).toBeVisible()
     //counting the number of product images and checking if its more then zero
     const products = page.locator('.product-image'); 
     const count = await products.count();
@@ -94,7 +94,6 @@ test('llisting menue',async ({page}) => {
     const menuItems = page.locator('nav ul li a');
     console.log(await menuItems.allTextContents());
 });
-
 
 
 
