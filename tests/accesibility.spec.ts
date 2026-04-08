@@ -1,28 +1,25 @@
 import { test, expect } from '@playwright/test';
-import AxeBuilder from '@axe-core/playwright';
+import { AccessibilityPage } from '../pages/wcag'; // adjust path if needed
 
+//test suit, help with creating an organized repost
 test.describe('Accessibility Scan - WCAG 2.1 A & AA', () => {
+  let accessibilityPage: AccessibilityPage;
 
-  test('should not have accessibility violations', async ({ page }) => {
+  //opening a new page before each test
+  test.beforeEach(async ({ page }) => {
+    accessibilityPage = new AccessibilityPage(page);
+    await accessibilityPage.goto();
+  });
 
-    await page.goto('https://automationteststore.com/', {
-      waitUntil: 'domcontentloaded'
-    });
-
-    const results = await new AxeBuilder({ page })
-      .withTags([
-        'wcag2a',
-        'wcag2aa',
-        'wcag21a',
-        'wcag21aa'
-      ])
-      .analyze();
+  //the actual test
+  test('should not have accessibility violations', async () => {
+    const results = await accessibilityPage.analyzeAccessibility();
 
     if (results.violations.length > 0) {
       console.log(JSON.stringify(results.violations, null, 2));
     }
 
+    //assertoion
     expect(results.violations).toEqual([]);
   });
-
 });
