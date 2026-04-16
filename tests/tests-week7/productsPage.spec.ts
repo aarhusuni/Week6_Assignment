@@ -1,22 +1,22 @@
 import { test, expect } from '@playwright/test';
-//importing object that opens random product menue
-import { HomePage} from '../../pages/HomePage';
-
+import { HomePage } from '../../pages/HomePage';
+//navigating to products page with POM, check product card and image appears
 test.describe('products-test', () => {
-  let Homepage:HomePage;
+  let homePage: HomePage;
 
-  test.beforeEach(async ({page}) => {
-  Homepage = new HomePage(page);
-    await Homepage.goto();
+  test.beforeEach(async ({ page }) => {
+    homePage = new HomePage(page);
+    await homePage.goto();
+    await homePage.navigateTo('Makeup'); 
+  });
+
+  // testing if product cards are visible
+  test('productcards', async () => {
+    await expect(homePage.productCards().first()).toBeVisible();
+  });
+
+  // testing if product images are visible
+  test('productimages', async () => {
+    await expect(homePage.productImages().first()).toBeVisible();
+  });
 });
-
-//testing if product card is visible
-test('productcards', async ({page}) => {
-  await expect(Homepage.productCards().first()).toBeVisible();
-})
-
-//testing if product image is visible
-test('productimages', async ({page}) => {
-    await expect(Homepage.productImages().first()).toBeVisible();
-})
-    });

@@ -1,13 +1,18 @@
 import { test, expect } from '@playwright/test';
-
 //5. In products.spec.ts: test navigating to products page, check product list appears
-test('productsweek7', async ({page}) => {
-    //go to page
-    await page.goto('https://raider-test-site.onrender.com/');
-    const categories = page.locator('nav ul li a');
-    const count = await categories.count();
-    expect(count).toBeGreaterThan(0);
-    const randomIndex = Math.floor(Math.random() * count);
-    await categories.nth(randomIndex).click();
-    await expect(page.locator('.product-card').first()).toBeVisible();
-    })
+test('navigate to Makeup and verify product cards', async ({ page }) => {
+  //go to homepage
+  await page.goto('https://raider-test-site.onrender.com/');
+
+  //click "Makeup" in navigation
+  const makeupLink = page.locator('nav').getByRole('link', { name: 'Makeup' });
+  await expect(makeupLink).toBeVisible();
+  await makeupLink.click();
+
+  //wait for products to load
+  const productCards = page.locator('.product-card');
+  await productCards.first().waitFor();
+
+  //assert product cards are visible
+  await expect(productCards.first()).toBeVisible();
+});
